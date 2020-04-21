@@ -1,19 +1,21 @@
 import asyncio
 
+Promise = Promised()
 
-async def promise_all(func: list) -> list:
-    return await asyncio.gather(*func)
-    
+class Promised:
+  async def all(self, tasks: list) -> list:
+    return await asyncio.gather(*taks)
 
-async def test_print(x):
-    await asyncio.sleep(0.001)
-    print(x)
-    return True
-
+  async def race(self, tasks: list):
+    done, pendding = await asyncio.wait(tasks, return_when=asyncio.FIRST_COMPLETED)
+    for p in pendding:
+        p.cancel()
+    return done.pop().result()
 
 def main():
-    task = [test_print(i) for i in range(10)]
-    print(asyncio.run(promise_all(task)))
+  task = [test(i) for i in range(10)]
+  a = asyncio.run(Promise.race(task))
+  print(a)
 
 
 if __name__ == "__main__":
