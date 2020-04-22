@@ -2,10 +2,10 @@ import asyncio
 
 class Promised:
     def all(self, tasks: list) -> list:
-        return asyncio.run(self.asyncAll(*tasks))
+        return asyncio.run(self.asyncAll(tasks))
     
     def race(self, tasks: list):
-        return asyncio.run(self.asyncRace(*tasks))
+        return asyncio.run(self.asyncRace(tasks))
     
     async def asyncAll(self, tasks: list) -> list:
         return await asyncio.gather(*tasks)
